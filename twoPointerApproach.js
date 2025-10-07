@@ -242,3 +242,46 @@ function threeSum(arr, target){
 }
 //console.log(threeSum([-4,-1,-1,0,1,2], 0)); 
 
+
+// Problem Statement: Longest Substring Without Repeating Characters 
+
+function longestSubstringWithoutRepeatingCharacters() {
+    let S = "fffffga";
+    let set = new Set();
+    let maxLength = 0;
+    let left = 0;
+
+    for (let right = 0; right < S.length; right++) {
+        while(set.has(S[right])) {
+            set.delete(S[left]);
+            left++;
+        }
+        set.add(S[right]);
+        maxLength = Math.max(maxLength, right - left + 1);
+    }
+    console.log(maxLength);
+}
+
+
+// longestSubstringWithoutRepeatingCharacters();
+
+// let S = "geeksforgeeks";
+
+// // Initialize a Set to store unique characters in the current window
+// let seen = new Set();
+// let maxLen = 0;
+// let left = 0; // Left pointer of the window
+
+// for (let right = 0; right < S.length; right++) {
+//     // If character is already in the set, remove characters from the left
+//     while (seen.has(S[right])) {
+//         seen.delete(S[left]);
+//         left++;
+//     }
+//     // Add the current character to the set
+//     seen.add(S[right]);
+//     // Update the maximum length found so far
+//     maxLen = Math.max(maxLen, right - left + 1);
+// }
+
+// console.log(maxLen); // Output: 7

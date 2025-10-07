@@ -62,7 +62,6 @@ function FindLongestNumber(text){
 
     //get max length word in single line code
     //return text.split(" ").sort()[0]
-
 }
 //console.log(FindLongestNumber("here arrrrrrrrrrre usssssss"))
 
@@ -177,3 +176,102 @@ function ChunkeyMonkey(arr, num){
 
 // console.log(ChunkeyMonkey([33,3,2,5,8],2)); 
 // //// output  - [ [ 33, 3 ], [ 2, 5 ], [ 8 ] ]
+
+
+// count how many files pushed to a brnach, file which is pushed already should not be count 
+/* 
+- Switch-Branch1
+ - Push-FileName1
+ - Push-FileName2
+ - Push-FileName3
+- Switch-Branch2
+ - Push-FileName4
+ - Push-FileName5
+- Switch-Branch1
+ - Push-FileName2
+*/
+
+function switchBranch(...text) {
+
+    let dict = new Map();
+    let start = 0;
+    let pointer = start + 1;
+
+    while (start < text.length -1) {
+        let switched;
+        let currentBranch;
+        if(text[start].includes('Switch-')) {
+            if(!dict.has(text[start])){
+                dict.set(text[start], new Set());
+            }
+            switched = true;
+            currentBranch = text[start];
+            
+        }
+        while (switched){
+            if(!text[pointer] || !text[pointer].includes('Push-'))
+            {
+                pointer ++;
+                start++
+                break;
+            }
+
+            // let files = dict.get(currentBranch);
+            // files.push(text[pointer]);
+            
+            //To add unique file eacj branch and avoid duplicates
+            dict.get(currentBranch).add(text[pointer]);
+            pointer ++;
+            start++ 
+        }
+
+    }
+    return dict;
+    
+}
+const output = switchBranch( "Switch-Branch1", "Push-FileName1", "Push-FileName2", "Push-FileName3",
+    "Switch-Branch2",
+     "Push-FileName4",
+     "Push-FileName5",
+    "Switch-Branch1",
+     "Push-FileName2");
+//console.log(output);
+/*
+OUTPUT : - 
+{
+  'Switch-Branch1' => Set(3) { 'Push-FileName1', 'Push-FileName2', 'Push-FileName3' },
+  'Switch-Branch2' => Set(2) { 'Push-FileName4', 'Push-FileName5' }
+}*/
+
+
+
+function switchBranchWithForLoop(...text) {
+
+    let dist = new Map();
+
+    for (let i = 0; i < text.length -1; i++){
+        let currentBranch;
+        if(text[i].includes('Switch-')) {
+            if(!dict.has(text[i])){
+                dict.set(text[i], new Set());
+            }
+            currentBranch = text[i];  
+        }
+
+        if(!text[i] || !text[i].includes('Push-'))
+        {
+            continue;
+        }
+        //To add unique file each branch and avoid duplicates
+        dict.get(currentBranch).add(text[pointer]);
+    }
+
+    return dist;
+}
+const output2 = switchBranch( "Switch-Branch1", "Push-FileName1", "Push-FileName2", "Push-FileName3",
+    "Switch-Branch2",
+     "Push-FileName4",
+     "Push-FileName5",
+    "Switch-Branch1",
+     "Push-FileName2");
+console.log(output2);

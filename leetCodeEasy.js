@@ -24,7 +24,7 @@ function getDupliacteElementInArray(){
     for (let index = 0; index < input.length; index++) {
         for(let j = index+1; j<input.length; j++){
             if (input[index] === input[j]) {
-                return true;                
+                return true;
             }else{
                 flag = false
             }
@@ -316,6 +316,10 @@ function insertionOfTwoArray(arr1, arr2){
     console.log(result);
 }
 //insertionOfTwoArray([1,3,5,6,7,8], [1,2,4,5,9])
+// output - [                                           
+//   1, 2, 3, 4,
+//   5, 6, 7, 8
+// ]
 
 /* LeetCode 485 || Max Consecutive ones */
 function MaxConsecutive(){
@@ -370,4 +374,46 @@ function mergeSortedArrays(arr1, arr2) {
 // Example usage
 let arr1 = [1, 3, 5, 7];
 let arr2 = [2, 4, 6, 8];
-console.log(mergeSortedArrays(arr1, arr2)); // Output: [1, 2, 3, 4, 5, 6, 7, 8]
+// console.log(mergeSortedArrays(arr1, arr2)); // Output: [1, 2, 3, 4, 5, 6, 7, 8]
+
+
+//merge two arrays
+function mergeTwoArray(arr1, arr2){
+    const mergedArr = arr1.concat(arr2);
+    console.log(mergedArr);
+}
+mergeTwoArray([1,2,3,4], [5,6,7,8])
+
+//identify how many char in string use Dictionary
+function identifyCountOfChar(text){
+
+}
+
+
+function convertRomanToInt(array) {
+    const romanMap = {
+        I: 1,
+        V: 5,
+        X: 10,
+        L: 50,
+        C: 100,
+        D: 500,
+        M: 1000
+    };
+
+    let total = 0;
+    for (let index = 0; index < array.length; index++) {
+        const current = romanMap[array[index]];
+        const next = romanMap[array[index + 1]];
+
+        // if next is bigger substract it
+        if(next && current < next) {
+            total -= current;
+        } else{
+            total += current;
+        }
+        
+    }
+    return total;
+}
+console.log(convertRomanToInt("MCMXCIV"));
